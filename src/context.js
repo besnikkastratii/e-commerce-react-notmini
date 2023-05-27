@@ -29,6 +29,7 @@ const ProductProvider = ({ children }) => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       setCart(JSON.parse(savedCart));
+      addTotals(JSON.parse(savedCart));
     }
   };
 
@@ -62,7 +63,7 @@ const ProductProvider = ({ children }) => {
     setDetailProduct({ ...product });
 
     localStorage.setItem("cart", JSON.stringify([...cart, product]));
-    addTotals();
+    addTotals([...cart, product]);
   };
 
   const openModal = id => {
@@ -84,7 +85,7 @@ const ProductProvider = ({ children }) => {
     product.total = product.count * product.price;
 
     setCart([...tempCart]);
-    addTotals();
+    addTotals([...tempCart]);
   };
 
   const decrement = id => {
@@ -102,14 +103,14 @@ const ProductProvider = ({ children }) => {
       product.total = product.count * product.price;
 
       setCart([...tempCart]);
-      addTotals();
+      addTotals([...tempCart]);
       localStorage.setItem("cart", JSON.stringify(tempCart));
     }
   };
 
-  const getTotals = () => {
+  const getTotals = (cartItems) => {
     let subTotal = 0;
-    cart.forEach(item => (subTotal += item.total));
+    cartItems.forEach(item => (subTotal += item.total));
     const tempTax = subTotal * 0.25;
     const tax = parseFloat(tempTax.toFixed(2));
     const total = subTotal + tax;
@@ -120,29 +121,32 @@ const ProductProvider = ({ children }) => {
     };
   };
 
-  const addTotals = () => {
-    const totals = getTotals();
+  const addTotals = (cartItems) => {
+    const totals = getTotals(cartItems);
     setCartSubTotal(totals.subTotal);
     setCartTax(totals.tax);
     setCartTotal(totals.total);
   };
 
-  const removeItem = id => {
+  const removeItem = (id) => {
     let tempProducts = [...products];
     let tempCart = [...cart];
-
+  
     const index = tempProducts.indexOf(getItem(id));
     let removedProduct = tempProducts[index];
     removedProduct.inCart = false;
     removedProduct.count = 0;
     removedProduct.total = 0;
-
-    tempCart = tempCart.filter(item => item.id !== id);
-
+  
+    tempCart = tempCart.filter((item) => item.id !== id);
+  
     setCart([...tempCart]);
     setProducts([...tempProducts]);
-    addTotals();
+    addTotals([...tempCart]);
+  
+    localStorage.setItem("cart", JSON.stringify(tempCart)); 
   };
+  
 
   const clearCart = () => {
     setCart([]);
@@ -155,7 +159,7 @@ const ProductProvider = ({ children }) => {
       });
       return updatedProducts;
     });
-    addTotals();
+    addTotals([]);
   };
 
   return (
