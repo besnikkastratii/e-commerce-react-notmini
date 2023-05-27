@@ -22,8 +22,8 @@ const ProductProvider = ({ children }) => {
       });
       return updatedProducts;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     checkLocalStorage();
+    // eslint-disable-next-line
   }, []);
 
   const checkLocalStorage = () => {
