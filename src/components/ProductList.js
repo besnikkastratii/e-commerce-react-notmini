@@ -17,8 +17,8 @@ const ProductList = () => {
     setCurrentPage(currentPage - 1);
   };
 
-  const handleSearchQueryChange = (event) => {
-    setSearchQuery(event.target.value);
+  const handleSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -27,12 +27,7 @@ const ProductList = () => {
         <div className="container">
           <Title name="our" title="products" />
           <div>
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={handleSearchQueryChange}
-            />
+            <input type="text" placeholder="Search products..." className='kerko' value={searchQuery} onChange={handleSearchQueryChange}/>
           </div>
           <div className="row">
             <ProductConsumer>
@@ -40,8 +35,7 @@ const ProductList = () => {
                 const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
                 const endIndex = startIndex + ITEMS_PER_PAGE;
                 const filteredProducts = value.products.filter((product) =>
-                  product.title.toLowerCase().includes(searchQuery.toLowerCase())
-                );
+                  product.title.toLowerCase().includes(searchQuery.toLowerCase()));
                 const products = filteredProducts.slice(startIndex, endIndex);
 
                 return products.map((product) => (
@@ -50,9 +44,9 @@ const ProductList = () => {
               }}
             </ProductConsumer>
           </div>
-          <div>
+          <div className='butonat' >
             {currentPage > 1 && (
-              <button onClick={handlePrevPage}>Previous</button>
+              <button className='mbrapa' onClick={handlePrevPage}>Previous</button>
             )}
             <ProductConsumer>
               {(value) => {
@@ -64,9 +58,7 @@ const ProductList = () => {
                 const products = filteredProducts;
 
                 return endIndex < products.length ? (
-                  <button onClick={handleNextPage}>Next</button>
-                ) : null;
-              }}
+                  <button className='para' onClick={handleNextPage}>Next</button>) : null; }}
             </ProductConsumer>
           </div>
         </div>

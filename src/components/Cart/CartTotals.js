@@ -7,24 +7,25 @@ export default function CartTotals({ value }) {
   const [surname, setSurname] = useState('');
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState(''); 
   const nameRef = useRef();
   const surnameRef = useRef();
   const addressRef = useRef();
   const phoneNumberRef = useRef();
+  const emailRef = useRef();
 
   const saveToLocalStorage = () => {
     const user = {
       name: nameRef.current.value,
       surname: surnameRef.current.value,
       address: addressRef.current.value,
-      phoneNumber: phoneNumberRef.current.value
+      phoneNumber: phoneNumberRef.current.value,
+      email: emailRef.current.value
     };
 
-    // Save user information and cart data to local storage
+
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('cart', JSON.stringify(cart));
-
-    // Clear the cart
     clearCart();
   };
 
@@ -55,11 +56,18 @@ export default function CartTotals({ value }) {
               onChange={(e) => setAddress(e.target.value)}
             />
             <input
-              type="text"
+              type="number"
               placeholder="Phone Number"
               ref={phoneNumberRef}
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              ref={emailRef}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Link to="/">
               <button

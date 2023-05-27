@@ -5,10 +5,10 @@ const ProductContext = React.createContext();
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [detailProduct, setDetailProduct] = useState(null);
+  const [detailProduct, setDetailProduct] = useState();
   const [cart, setCart] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalProduct, setModalProduct] = useState(null);
+  const [modalProduct, setModalProduct] = useState();
   const [cartSubTotal, setCartSubTotal] = useState(0);
   const [cartTax, setCartTax] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
@@ -49,8 +49,7 @@ const ProductProvider = ({ children }) => {
     setDetailProduct(product);
   };
 
-
-  const addToCart = id => {
+  const addToCart = (id) => {
     let tempProducts = [...products];
     const index = tempProducts.indexOf(getItem(id));
     const product = tempProducts[index];
@@ -62,11 +61,12 @@ const ProductProvider = ({ children }) => {
     setCart([...cart, product]);
     setDetailProduct({ ...product });
 
-    localStorage.setItem("cart", JSON.stringify([...cart, product]));
-    addTotals([...cart, product]);
+    const updatedCart = [...cart, product];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    addTotals(updatedCart);
   };
 
-  const openModal = id => {
+  const openModal = (id) => {
     const product = getItem(id);
     setModalProduct(product);
     setModalOpen(true);
@@ -76,9 +76,9 @@ const ProductProvider = ({ children }) => {
     setModalOpen(false);
   };
 
-  const increment = id => {
+  const increment = (id) => {
     let tempCart = [...cart];
-    const selectedProduct = tempCart.find(item => item.id === id);
+    const selectedProduct = tempCart.find((item) => item.id === id);
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
     product.count = product.count + 1;
@@ -86,18 +86,19 @@ const ProductProvider = ({ children }) => {
 
     setCart([...tempCart]);
     addTotals([...tempCart]);
+    localStorage.setItem("cart", JSON.stringify(tempCart));
   };
 
-  const decrement = id => {
+  const decrement = (id) => {
     let tempCart = [...cart];
-    const selectedProduct = tempCart.find(item => item.id === id);
+    const selectedProduct = tempCart.find((item) => item.id === id);
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
     product.count = product.count - 1;
 
     if (product.count === 0) {
       removeItem(id);
-      tempCart = tempCart.filter(item => item.id !== id);
+      tempCart = tempCart.filter((item) => item.id !== id);
       localStorage.setItem("cart", JSON.stringify(tempCart));
     } else {
       product.total = product.count * product.price;
@@ -110,14 +111,14 @@ const ProductProvider = ({ children }) => {
 
   const getTotals = (cartItems) => {
     let subTotal = 0;
-    cartItems.forEach(item => (subTotal += item.total));
-    const tempTax = subTotal * 0.25;
+    cartItems.forEach((item) => (subTotal += item.total));
+    const tempTax = subTotal * 0.1;
     const tax = parseFloat(tempTax.toFixed(2));
     const total = subTotal + tax;
     return {
       subTotal,
       tax,
-      total
+      total,
     };
   };
 
@@ -131,29 +132,28 @@ const ProductProvider = ({ children }) => {
   const removeItem = (id) => {
     let tempProducts = [...products];
     let tempCart = [...cart];
-  
+
     const index = tempProducts.indexOf(getItem(id));
     let removedProduct = tempProducts[index];
     removedProduct.inCart = false;
     removedProduct.count = 0;
     removedProduct.total = 0;
-  
+
     tempCart = tempCart.filter((item) => item.id !== id);
-  
+
     setCart([...tempCart]);
     setProducts([...tempProducts]);
     addTotals([...tempCart]);
-  
-    localStorage.setItem("cart", JSON.stringify(tempCart)); 
+
+    localStorage.setItem("cart", JSON.stringify(tempCart));
   };
-  
 
   const clearCart = () => {
     setCart([]);
     localStorage.removeItem("cart");
     setProducts(() => {
       let updatedProducts = [];
-      storeProducts.forEach(item => {
+      storeProducts.forEach((item) => {
         const singleItem = { ...item };
         updatedProducts = [...updatedProducts, singleItem];
       });
