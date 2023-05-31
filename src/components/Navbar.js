@@ -1,37 +1,88 @@
-import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import styled from 'styled-components';
-import {ButtonContainer} from './Button';
+import { ButtonContainer } from './Button';
+import { ProductConsumer } from '../context';
 
 export default class Navbar extends Component {
     render() {
-        return (
-            <NavWrapper className="navbar nav-bar-expand-sm navbar-dark px-sm-5">
-               <Link to='/'>
+      return (
+        <ProductConsumer>
+          {(value) => {
+            const { cart } = value;
+            const cartItemsCount = cart.reduce(
+              (total, item) => total + item.count,
+              0
+            );
+  
+            return (
+              <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
+                <Link to="/">
                   <img src={logo} alt="store" className="navbar-brand" />
-               </Link> 
-               <ul className="navbar-nav align-items-center">
-                 <li className="nav-item ml-5">
+                </Link>
+                <ul className="navbar-nav align-items-center">
+                  <li className="nav-item ml-5">
                     <Link to="/" className="nav-link">
-                       Mobile Shop
+                      Mobile Shop
                     </Link>
-                 </li>
-               </ul>
-               <Link to="/cart" className="ml-auto">
+                  </li>
+                  <li className="nav-item ml-5">
+                    <Link to="/" className="nav-link">
+                      About Us
+                    </Link>
+                  </li>
+                  <li className="nav-item ml-5">
+                    <Link to="/" className="nav-link">
+                      Contact Us
+                    </Link>
+                  </li>
+                </ul>
+                <Link to="/cart" className="ml-auto">
                   <ButtonContainer>
-                      <i className="fas fa-cart-plus">my cart</i>
+                    <i className="fas fa-cart-plus" /> My Cart
+                    {cartItemsCount > 0 && (
+                      <CartIndicator className="cart-indicator">
+                        {cartItemsCount}
+                      </CartIndicator>
+                    )}
                   </ButtonContainer>
-               </Link>
-            </NavWrapper>
-        )
+                </Link>
+              </NavWrapper>
+            );
+          }}
+        </ProductConsumer>
+      );
     }
-}
+  }
+  
+
 const NavWrapper = styled.nav`
-background:var(--mainBlue);
-.nav-link{
-    color:var(--mainWhite) !important;
-    font-size:1.3 rem;
-    text-transform:capitalize;
-}
+background: var(--mainDark);
+
+  .nav-link {
+    color: var(--mainWhite) !important;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--mainYellow) !important;
+    }
+  }
+`;
+
+const CartIndicator = styled.span`
+  position: relative;
+  top: -3px;
+  left: 80px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: white;
 `;

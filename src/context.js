@@ -34,6 +34,7 @@ const ProductProvider = ({ children }) => {
     }
   };
 
+
   const getItem = useCallback((id) => {
     return products.find((item) => item.id === id);
   }, [products]);
@@ -194,3 +195,4 @@ const ProductProvider = ({ children }) => {
 const ProductConsumer = ProductContext.Consumer;
 
 export { ProductProvider, ProductConsumer };
+

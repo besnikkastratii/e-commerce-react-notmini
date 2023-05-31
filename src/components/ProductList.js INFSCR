@@ -1,0 +1,121 @@
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Product from './Product';
+import Title from './Title';
+import { ProductConsumer } from '../context';
+
+const ITEMS_PER_PAGE = 6;
+
+const ProductList = () => {
+  // State variables
+  const [searchQuery, setSearchQuery] = useState('');
+  const [loadedItems, setLoadedItems] = useState(ITEMS_PER_PAGE);
+  const [initialLoad, setInitialLoad] = useState(false);
+
+  // Event handler for search query change
+  const handleSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Callback function to load more items
+  const loadMoreItems = useCallback(() => {
+    setLoadedItems((prevLoadedItems) => prevLoadedItems + ITEMS_PER_PAGE);
+  }, []);
+
+  // Reference to the loader element
+  const loaderRef = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '20px',
+      threshold: 1.0,
+    };
+
+    // Intersection Observer to trigger loadMoreItems when reaching end of page
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadMoreItems();
+      }
+    }, options);
+
+    const currentLoaderRef = loaderRef.current;
+
+    if (currentLoaderRef && initialLoad) {
+      observer.observe(currentLoaderRef);
+    }
+
+    // Cleanup function for Intersection Observer
+    return () => {
+      if (currentLoaderRef) {
+        observer.unobserve(currentLoaderRef);
+      }
+    };
+  }, [initialLoad, loadMoreItems]);
+
+  // Event handler for Load More button click
+  const handleLoadMoreClick = () => {
+    setInitialLoad(true);
+    loadMoreItems();
+  };
+
+  return (
+    <React.Fragment>
+      <div className="py-1">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <Title name="our" title="products" />
+            </div>
+            <div className="col-12 text-right">
+              <input
+                type="text"
+                placeholder="Search products..."
+                onChange={handleSearchQueryChange}
+                className="kerko"
+                value={searchQuery}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <ProductConsumer>
+              {(value) => {
+                const filteredProducts = value.products.filter((product) =>
+                  product.title.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+                const products = filteredProducts.slice(0, loadedItems);
+
+                if (products.length === 0) {
+                  return (
+                    <div className="no-items-found">
+                      <p>No items found with the {searchQuery}.</p>
+                    </div>
+                  );
+                }
+
+                return products.map((product) => (
+                  <Product key={product.id} product={product} />
+                ));
+              }}
+            </ProductConsumer>
+          </div>
+          {!initialLoad && (
+            <div className="butonat">
+              <button className="load-more" onClick={handleLoadMoreClick}>
+                Load More
+              </button>
+            </div>
+          )}
+          {initialLoad && (
+            <div className="butonat">
+              <div className="loader" ref={loaderRef}>
+                Loading...
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default ProductList;

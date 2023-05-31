@@ -25,9 +25,14 @@ const ProductList = () => {
     <React.Fragment>
       <div className="py-1">
         <div className="container">
-          <Title name="our" title="products" />
-          <div>
-            <input type="text" placeholder="Search products..." className='kerko' value={searchQuery} onChange={handleSearchQueryChange}/>
+          <div className="row">
+            <div className="col-12">
+              <Title name="our" title="products" />
+            </div>
+            <div className="col-12 text-right">
+              <input type="text" placeholder="Search products..." onChange={handleSearchQueryChange} className="kerko" value={searchQuery}
+              />
+            </div>
           </div>
           <div className="row">
             <ProductConsumer>
@@ -35,8 +40,17 @@ const ProductList = () => {
                 const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
                 const endIndex = startIndex + ITEMS_PER_PAGE;
                 const filteredProducts = value.products.filter((product) =>
-                  product.title.toLowerCase().includes(searchQuery.toLowerCase()));
+                  product.title.toLowerCase().includes(searchQuery.toLowerCase())
+                );
                 const products = filteredProducts.slice(startIndex, endIndex);
+
+                if (products.length === 0) {
+                  return (
+                    <div className="no-items-found">
+                      <p>No items found with the {searchQuery}.</p>
+                    </div>
+                  );
+                }
 
                 return products.map((product) => (
                   <Product key={product.id} product={product} />
@@ -44,9 +58,11 @@ const ProductList = () => {
               }}
             </ProductConsumer>
           </div>
-          <div className='butonat' >
+          <div className="butonat">
             {currentPage > 1 && (
-              <button className='mbrapa' onClick={handlePrevPage}>Previous</button>
+              <button className="mbrapa" onClick={handlePrevPage}>
+                Previous
+              </button>
             )}
             <ProductConsumer>
               {(value) => {
@@ -58,7 +74,11 @@ const ProductList = () => {
                 const products = filteredProducts;
 
                 return endIndex < products.length ? (
-                  <button className='para' onClick={handleNextPage}>Next</button>) : null; }}
+                  <button className="para" onClick={handleNextPage}>
+                    Next
+                  </button>
+                ) : null;
+              }}
             </ProductConsumer>
           </div>
         </div>
