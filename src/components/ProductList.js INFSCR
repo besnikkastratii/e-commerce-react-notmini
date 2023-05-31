@@ -11,17 +11,17 @@ const ProductList = () => {
   const [loadedItems, setLoadedItems] = useState(ITEMS_PER_PAGE);
   const [initialLoad, setInitialLoad] = useState(false);
 
-  // Event handler for search query change
+  // Event handler per onchange te search
   const handleSearchQueryChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Callback function to load more items
+  // Callback function per me load produkte
   const loadMoreItems = useCallback(() => {
     setLoadedItems((prevLoadedItems) => prevLoadedItems + ITEMS_PER_PAGE);
   }, []);
 
-  // Reference to the loader element
+ 
   const loaderRef = useRef(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const ProductList = () => {
       threshold: 1.0,
     };
 
-    // Intersection Observer to trigger loadMoreItems when reaching end of page
+    // Kurr mrri nfund tfaqes pasi klikojm loadmore
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         loadMoreItems();
@@ -44,7 +44,7 @@ const ProductList = () => {
       observer.observe(currentLoaderRef);
     }
 
-    // Cleanup function for Intersection Observer
+
     return () => {
       if (currentLoaderRef) {
         observer.unobserve(currentLoaderRef);
@@ -52,7 +52,7 @@ const ProductList = () => {
     };
   }, [initialLoad, loadMoreItems]);
 
-  // Event handler for Load More button click
+  // Event handler per Load More buttonin kur klikojm
   const handleLoadMoreClick = () => {
     setInitialLoad(true);
     loadMoreItems();
