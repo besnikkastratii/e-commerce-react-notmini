@@ -6,21 +6,37 @@ import { ButtonContainer } from './Button';
 import { ProductConsumer } from '../context';
 
 export default class Navbar extends Component {
-    render() {
-      return (
-        <ProductConsumer>
-          {(value) => {
-            const { cart } = value;
-            const cartItemsCount = cart.reduce(
-              (total, item) => total + item.count,
-              0
-            );
-  
-            return (
-              <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
-                <Link to="/">
-                  <img src={logo} alt="store" className="navbar-brand" />
-                </Link>
+  state = {
+    isMobileMenuOpen: false,
+  };
+
+  toggleMobileMenu = () => {
+    this.setState((prevState) => ({
+      isMobileMenuOpen: !prevState.isMobileMenuOpen,
+    }));
+  };
+
+  render() {
+    return (
+      <ProductConsumer>
+        {(value) => {
+          const { cart } = value;
+          const cartItemsCount = cart.reduce((total, item) => total + item.count, 0);
+
+          return (
+            <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
+              <Link to="/">
+                <img src={logo} alt="store" className="navbar-brand" />
+              </Link>
+              <button
+                className="navbar-toggler"
+                type="button"
+                onClick={this.toggleMobileMenu}
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+              <div
+                className={`collapse navbar-collapse ${this.state.isMobileMenuOpen ? 'show' : '' }`} >
                 <ul className="navbar-nav align-items-center">
                   <li className="nav-item ml-5">
                     <Link to="/" className="nav-link">
@@ -38,27 +54,27 @@ export default class Navbar extends Component {
                     </Link>
                   </li>
                 </ul>
-                <Link to="/cart" className="ml-auto">
-                  <ButtonContainer>
-                    <i className="fas fa-cart-plus" /> My Cart
-                    {cartItemsCount > 0 && (
-                      <CartIndicator className="cart-indicator">
-                        {cartItemsCount}
-                      </CartIndicator>
-                    )}
-                  </ButtonContainer>
-                </Link>
-              </NavWrapper>
-            );
-          }}
-        </ProductConsumer>
-      );
-    }
+              </div>
+              <Link to="/cart" className="ml-auto">
+                <ButtonContainer>
+                  <i className="fas fa-cart-plus" /> My Cart
+                  {cartItemsCount > 0 && (
+                    <CartIndicator className="cart-indicator">
+                      {cartItemsCount}
+                    </CartIndicator>
+                  )}
+                </ButtonContainer>
+              </Link>
+            </NavWrapper>
+          );
+        }}
+      </ProductConsumer>
+    );
   }
-  
+}
 
 const NavWrapper = styled.nav`
-background: var(--mainDark);
+  background: var(--mainDark);
 
   .nav-link {
     color: var(--mainWhite) !important;
@@ -68,6 +84,17 @@ background: var(--mainDark);
 
     &:hover {
       color: var(--mainYellow) !important;
+    }
+  }
+
+  .navbar-toggler {
+    order: -1;
+    margin-right: 1rem;
+  }
+
+  @media (min-width: 576px) {
+    .navbar-toggler {
+      display: none;
     }
   }
 `;

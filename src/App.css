@@ -65,3 +65,16 @@ text-align: center;
   width: 31.5%;
   text-transform: lowercase;
 }
+
+@media screen and (max-width: 400px) {
+  .kerko {
+    display: flex !important;
+    margin: 0 auto;
+    width: 73%;
+    padding: 10px;
+    text-transform: uppercase;
+  }
+  .navbar-toggler-icon {
+    align-items: left!important;
+  }
+}
