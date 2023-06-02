@@ -14,7 +14,7 @@ export default class Modal extends Component {
           if (!modalOpen || !modalProduct) {
             return null;
           } else {
-            const { img, title, price } = modalProduct;
+            const { id, img, title, price } = modalProduct;
             return (
               <ModalContainer>
                 <div className="container">
@@ -37,6 +37,7 @@ export default class Modal extends Component {
                           go to cart
                         </ButtonContainer>
                       </Link>
+                      <ButtonContainer className='removefromcartmodal' cart onClick={() => {value.removeItem(id);closeModal(); }} >remove from cart</ButtonContainer>
                     </div>
                   </div>
                 </div>
@@ -48,14 +49,13 @@ export default class Modal extends Component {
     );
   }
 }
-
 const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;

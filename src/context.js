@@ -116,7 +116,7 @@ const ProductProvider = ({ children }) => {
     cartItems.forEach((item) => (subTotal += item.total));
     const tempTax = subTotal * 0.1;
     const tax = parseFloat(tempTax.toFixed(2));
-    const total = subTotal + tax;
+    const total = parseFloat((subTotal + tax).toFixed(2));
     return {
       subTotal,
       tax,
@@ -128,7 +128,7 @@ const ProductProvider = ({ children }) => {
     const totals = getTotals(cartItems);
     setCartSubTotal(totals.subTotal);
     setCartTax(totals.tax);
-    setCartTotal(totals.total);
+    setCartTotal(parseFloat(totals.total.toFixed(2)));
   };
 
   const removeItem = (id) => {

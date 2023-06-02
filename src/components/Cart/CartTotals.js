@@ -32,8 +32,8 @@ export default function CartTotals({ value }) {
   return (
     <React.Fragment>
       <form method='post' netlify >
-      <div className="container">
-        <div className="row">
+      <div className="container" >
+        <div className="row" id='formulari'>
           <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-8 text-capitalize text-right">
             <input
               type="text"
@@ -81,7 +81,7 @@ export default function CartTotals({ value }) {
             </Link>
             <h5>
               <span className="text-title">subtotal :</span>
-              <strong>{cartSubTotal}</strong>
+              <strong>{cartSubTotal.toFixed(2)}</strong>
             </h5>
             <h5>
               <span className="text-title">taxes :</span>
