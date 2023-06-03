@@ -4,6 +4,7 @@
  --mainWhite:#f3f3f3;
  --mainDark:#232528;
  --mainYellow:#ffa400;
+ --mainRed:#ff0000;
 }
 body{
   font-family:"Anton", sans-serif !important;
@@ -108,6 +109,45 @@ text-align: center;
   background-color: #ebebeb;
   outline: none;
 }
+
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loader {
+  color: #052bff;
+  font-family: Consolas, Menlo, Monaco, monospace;
+  font-weight: bold;
+  font-size: 78px;
+  opacity: 0.8;
+}
+.loader:before {
+  color: hwb(340 0% 2%);
+  content: "{";
+  display: inline-block;
+  animation: pulse 0.4s alternate infinite ease-in-out;
+}
+.loader:after {
+  color: #008cff;
+  content: "}";
+  display: inline-block;
+  animation: pulse 0.4s 0.3s alternate infinite ease-in-out;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+}
+    
+
+
+
 
 @media screen and (max-width: 600px) {
   .kerko {

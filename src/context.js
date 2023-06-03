@@ -4,6 +4,7 @@ import { storeProducts } from "./data";
 const ProductContext = React.createContext();
 
 const ProductProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true); // Add loading state
   const [products, setProducts] = useState([]);
   const [detailProduct, setDetailProduct] = useState();
   const [cart, setCart] = useState([]);
@@ -14,15 +15,19 @@ const ProductProvider = ({ children }) => {
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    setProducts(() => {
-      let updatedProducts = [];
-      storeProducts.forEach((item) => {
-        const singleItem = { ...item };
-        updatedProducts = [...updatedProducts, singleItem];
+    setTimeout(() => {
+      setProducts(() => {
+        let updatedProducts = [];
+        storeProducts.forEach((item) => {
+          const singleItem = { ...item };
+          updatedProducts = [...updatedProducts, singleItem];
+        });
+        return updatedProducts;
       });
-      return updatedProducts;
-    });
-    checkLocalStorage();
+      checkLocalStorage();
+      setLoading(false); // Set loading to false after 3 seconds
+    }, 3000); // 3 seconds
+
     // eslint-disable-next-line
   }, []);
 
@@ -33,7 +38,6 @@ const ProductProvider = ({ children }) => {
       addTotals(JSON.parse(savedCart));
     }
   };
-
 
   const getItem = useCallback((id) => {
     return products.find((item) => item.id === id);
@@ -164,7 +168,6 @@ const ProductProvider = ({ children }) => {
     addTotals([]);
   };
 
-
   return (
     <ProductContext.Provider
       value={{
@@ -186,13 +189,18 @@ const ProductProvider = ({ children }) => {
         clearCart,
       }}
     >
-      {children}
+      {loading ? (
+  <div className="loader-container">
+<span class="loader">Per Programera</span>
+  </div>
+) : (
+  children
+)}
+
     </ProductContext.Provider>
   );
 };
 
-
 const ProductConsumer = ProductContext.Consumer;
 
 export { ProductProvider, ProductConsumer };
-
