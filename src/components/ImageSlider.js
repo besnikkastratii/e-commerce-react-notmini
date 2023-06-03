@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const ImageSlider = ({ images, handleCategoryClick }) => {
+  // eslint-disable-next-line
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const settings = {
