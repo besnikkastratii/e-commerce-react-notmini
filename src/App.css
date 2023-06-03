@@ -160,4 +160,41 @@ text-align: center;
   .navbar-toggler-icon {
     align-items: left!important;
   }
+
+  .loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: -50%;
+  }
+  
+  .loader {
+    color: #052bff;
+    font-family: Consolas, Menlo, Monaco, monospace;
+    font-weight: bold;
+    font-size: 32px; /* Adjust the font size for mobile */
+    opacity: 0.8;
+  }
+  
+  .loader:before {
+    color: rgb(250, 0, 83);
+    content: "{";
+    display: inline-block;
+    animation: pulse 0.4s alternate infinite ease-in-out;
+  }
+  
+  .loader:after {
+    color: #008cff;
+    content: "}";
+    display: inline-block;
+    animation: pulse 0.4s 0.3s alternate infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    to {
+      transform: scale(0.8);
+      opacity: 0.8;
+    }
+  }
+  
 }
