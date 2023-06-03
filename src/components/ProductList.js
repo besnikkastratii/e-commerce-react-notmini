@@ -28,9 +28,9 @@ const ProductList = () => {
   };
 
   const sliderImages = [
-    { src: './img/IPH14.png', category: 'iphone' },
-    { src: './img/S23.png', category: 'samsung' },
-    { src: './img/MI11.png', category: 'xiaomi' },
+    { src: './img/IPH14.png', category: 'IPHONE' },
+    { src: './img/S23.png', category: 'SAMSUNG' },
+    { src: './img/MI11.png', category: 'XIAOMI' },
   ];
 
   return (
@@ -44,12 +44,7 @@ const ProductList = () => {
           </div>
           <div className="row">
             <div className="col-12 text-right">
-              <input
-                type="text"
-                placeholder="Search products..."
-                onChange={handleSearchQueryChange}
-                className="kerko"
-                value={searchQuery}
+              <input type="text" placeholder="Search products..." onChange={handleSearchQueryChange} className="kerko" value={searchQuery}
               />
             </div>
           </div>

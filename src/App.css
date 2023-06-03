@@ -141,7 +141,7 @@ text-align: center;
 @keyframes pulse {
   to {
     transform: scale(0.8);
-    opacity: 0.8;
+    opacity: 1.8;
   }
 }
     
@@ -160,24 +160,52 @@ text-align: center;
 
 .slider-button {
   position: absolute;
-  top: 50%;
-  right: 20px;
+  top: 80%;
+  right: 520px;
   transform: translateY(-50%);
   z-index: 2;
-  background-color: #ffffff;
-  border: none;
+ color: #ebebeb;
   padding: 10px 20px;
   font-size: 16px;
-  color: #000000;
+  overflow: hidden;
   cursor: pointer;
+  font-size:15px;
+  font-family:Arial;
+ width: 150px;
+  height:50px;
+  background:transparent;
+  right: 50px;
+}
+
+.slider-button::before {
+  content: "new";
+  display: block;
+  font-size: 15px;
+  width: 70px;
+  text-align: center;
+  background-color: #f00;
+  color: #fff;
+  padding: 7px 0 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-34%, -4px) rotate(-50deg);
+  transition: .3s;
+}
+
+.slider-button:hover {
+  color: #fff;
+  background-color: #f00;
+}
+
+.slider-button:hover::before {
+  background-color: #fff;
+  color: #f00;
 }
 
 
 
-
-
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 720px) {
   .kerko {
     display: flex !important;
     margin: 0 auto;
@@ -220,7 +248,7 @@ text-align: center;
   
   @keyframes pulse {
     to {
-      transform: scale(0.8);
+      transform: scale(1.8);
       opacity: 0.8;
     }
   }
@@ -232,6 +260,7 @@ text-align: center;
   }
 
   .slider-button {
+    color: black;
     position: static;
     display: inline-block;
     margin-top: 10px;
