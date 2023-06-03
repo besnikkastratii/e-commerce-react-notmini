@@ -5,7 +5,7 @@ export const storeProducts = [
     id: 1,
     title: "Samsung S23 ULTRA",
     img: "https://media.croma.com/image/upload/v1675347263/Croma%20Assets/Communication/Mobiles/Images/268882_xs1kvn.png",
-    price: 1.199,
+    price: 1099.99,
     company: "SAMSUNG",
     info:
       "Lorem ipsum dolor amet offal butcher quinoa sustainable gastropub, echo park actually green juice sriracha paleo. Brooklyn sriracha semiotics, DIY coloring book mixtape craft beer sartorial hella blue bottle. Tote bag wolf authentic try-hard put a bird on it mumblecore. Unicorn lumbersexual master cleanse blog hella VHS, vaporware sartorial church-key cardigan single-origin coffee lo-fi organic asymmetrical. Taxidermy semiotics celiac stumptown scenester normcore, ethical helvetica photo booth gentrify.",
