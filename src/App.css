@@ -126,7 +126,7 @@ text-align: center;
   opacity: 0.8;
 }
 .loader:before {
-  color: hwb(340 0% 2%);
+  color: rgb(250, 0, 83);
   content: "{";
   display: inline-block;
   animation: pulse 0.4s alternate infinite ease-in-out;
