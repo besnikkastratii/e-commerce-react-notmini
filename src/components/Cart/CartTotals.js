@@ -31,7 +31,7 @@ export default function CartTotals({ value }) {
 
   return (
     <React.Fragment>
-      <form method='post' netlify >
+      <form method='post' netlify={true.toString()}>
       <div className="container" >
         <div className="row" id='formulari'>
           <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-8 text-capitalize text-right">

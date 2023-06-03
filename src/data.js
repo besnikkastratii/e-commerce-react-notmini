@@ -3,10 +3,10 @@
 export const storeProducts = [
   {
     id: 1,
-    title: "Google Pixel - Black",
-    img: "img/product-1.png",
-    price: 125,
-    company: "GOOGLE",
+    title: "Samsung S23 ULTRA",
+    img: "https://media.croma.com/image/upload/v1675347263/Croma%20Assets/Communication/Mobiles/Images/268882_xs1kvn.png",
+    price: 1.199,
+    company: "SAMSUNG",
     info:
       "Lorem ipsum dolor amet offal butcher quinoa sustainable gastropub, echo park actually green juice sriracha paleo. Brooklyn sriracha semiotics, DIY coloring book mixtape craft beer sartorial hella blue bottle. Tote bag wolf authentic try-hard put a bird on it mumblecore. Unicorn lumbersexual master cleanse blog hella VHS, vaporware sartorial church-key cardigan single-origin coffee lo-fi organic asymmetrical. Taxidermy semiotics celiac stumptown scenester normcore, ethical helvetica photo booth gentrify.",
     inCart: false,
@@ -27,10 +27,10 @@ export const storeProducts = [
   },
   {
     id: 3,
-    title: "HTC 10 - Black",
-    img: "img/product-3.png",
-    price: 70,
-    company: "htc",
+    title: "Xiaomi Mi 11 ULTRA",
+    img: "https://cdn.shopify.com/s/files/1/1126/0898/products/286737-08ae5808cb981cddea115139e4b04fb0_700x700.webp?v=1675808635",
+    price: 799,
+    company: "xiaomi",
     info:
       "Lorem ipsum dolor amet offal butcher quinoa sustainable gastropub, echo park actually green juice sriracha paleo. Brooklyn sriracha semiotics, DIY coloring book mixtape craft beer sartorial hella blue bottle. Tote bag wolf authentic try-hard put a bird on it mumblecore. Unicorn lumbersexual master cleanse blog hella VHS, vaporware sartorial church-key cardigan single-origin coffee lo-fi organic asymmetrical. Taxidermy semiotics celiac stumptown scenester normcore, ethical helvetica photo booth gentrify.",
     inCart: false,
@@ -159,7 +159,7 @@ export const storeProducts = [
   },
   {
     id: 14,
-    title: "Vintage Iphone",
+    title: "iPhone 14 PRO MAX",
     img: "https://cdn.shopify.com/s/files/1/0552/0883/7292/products/iphone-14-pro-max-gold-1..jpg",
     price: 1700.50,
     company: "apple",
