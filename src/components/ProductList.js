@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Product from './Product';
-import Title from './Title';
 import { ProductConsumer } from '../context';
+import ImageSlider from './ImageSlider';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -21,16 +23,33 @@ const ProductList = () => {
     setSearchQuery(e.target.value);
   };
 
+  const handleCategoryClick = (category) => {
+    setSearchQuery(category.toLowerCase()); // Autofill the search input with the lowercase category
+  };
+
+  const sliderImages = [
+    { src: './img/IPH14.png', category: 'iphone' },
+    { src: './img/S23.png', category: 'samsung' },
+    { src: './img/MI11.png', category: 'xiaomi' },
+  ];
+
   return (
     <React.Fragment>
       <div className="py-1">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <Title name="our" title="products" />
+              <ImageSlider images={sliderImages} handleCategoryClick={handleCategoryClick} />
             </div>
+          </div>
+          <div className="row">
             <div className="col-12 text-right">
-              <input type="text" placeholder="Search products..." onChange={handleSearchQueryChange} className="kerko" value={searchQuery}
+              <input
+                type="text"
+                placeholder="Search products..."
+                onChange={handleSearchQueryChange}
+                className="kerko"
+                value={searchQuery}
               />
             </div>
           </div>

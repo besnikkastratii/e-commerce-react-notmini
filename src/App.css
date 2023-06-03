@@ -145,6 +145,34 @@ text-align: center;
   }
 }
     
+.slider-container {
+  position: relative;
+}
+
+.slider-item {
+  position: relative;
+}
+
+.slider-image {
+  width: 100%;
+  height: auto;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 2;
+  background-color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #000000;
+  cursor: pointer;
+}
+
+
 
 
 
@@ -196,5 +224,17 @@ text-align: center;
       opacity: 0.8;
     }
   }
-  
+
+  .slider-item {
+    position: static;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .slider-button {
+    position: static;
+    display: inline-block;
+    margin-top: 10px;
+    transform: translateY(0);
+  }
 }
