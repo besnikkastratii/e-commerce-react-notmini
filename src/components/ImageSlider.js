@@ -12,7 +12,7 @@ const ImageSlider = ({ images, handleCategoryClick }) => {
     infinite: true,
     speed: 2500,
     slidesToShow: 1,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 6000,
