@@ -44,6 +44,15 @@ const ProductList = () => {
       observer.observe(currentLoaderRef);
     }
 
+const handleCategoryClick = (category) => {
+    setSearchQuery(category.toLowerCase()); // Autofill the search input with the lowercase category
+  };
+
+  const sliderImages = [
+    { src: './img/IPH14.png', category: 'IPHONE' },
+    { src: './img/S23.png', category: 'SAMSUNG' },
+    { src: './img/MI11.png', category: 'XIAOMI' },
+  ];
 
     return () => {
       if (currentLoaderRef) {

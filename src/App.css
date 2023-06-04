@@ -138,6 +138,7 @@ text-align: center;
   animation: pulse 0.4s 0.3s alternate infinite ease-in-out;
 }
 
+
 @keyframes pulse {
   to {
     transform: scale(0.8);
@@ -147,6 +148,7 @@ text-align: center;
     
 .slider-container {
   position: relative;
+  
 }
 
 .slider-item {
@@ -204,6 +206,11 @@ text-align: center;
 }
 
 
+.loader2 {
+  font-size: 50px;
+  color: #0019fd;
+}
+
 
 @media screen and (max-width: 720px) {
   .kerko {
@@ -217,6 +224,8 @@ text-align: center;
     align-items: left!important;
   }
 
+
+  
   .loader-container {
     display: flex;
     align-items: center;
@@ -254,20 +263,28 @@ text-align: center;
   }
 
   .slider-item {
-    position: static;
+    position: relative; /* Set position to relative */
     text-align: center;
     margin-bottom: 20px;
   }
 
   .slider-button {
+    background: rgb(221, 221, 221 ,0.5);
+    width: 130px;
+    height: 40px;
     color: black;
-    position: static;
-    display: inline-block;
-    margin-top: 10px;
-    transform: translateY(0);
+    position: absolute; /* Set position to absolute */
+    top: 80%; /* Adjust the top value as per your design */
+    left: 50%; /* Adjust the left value as per your design */
+    transform: translate(-140%, -50%); /* Center the button horizontally and vertically */
+    z-index: 2;
   }
   .slick-slide img {
     height: 280px;
     display: block;
+}
+
+.svg-inline--fa {
+  display: none;
 }
 }

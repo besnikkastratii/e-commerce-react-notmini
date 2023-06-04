@@ -191,7 +191,8 @@ const ProductProvider = ({ children }) => {
     >
       {loading ? (
   <div className="loader-container">
-<span className="loader">Per Programera</span>
+<span className="loader">Për Programera</span>
+<span className="loader2"></span>
   </div>
 ) : (
   children
