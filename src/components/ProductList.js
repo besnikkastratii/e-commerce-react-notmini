@@ -44,8 +44,7 @@ const ProductList = () => {
           </div>
           <div className="row">
             <div className="col-12 text-right">
-              <input type="text" placeholder="Search products..." onChange={handleSearchQueryChange} className="kerko" value={searchQuery}
-              />
+              <input type="text" placeholder="Search products..." onChange={handleSearchQueryChange} className="kerko" value={searchQuery}/>
             </div>
           </div>
           <div className="row">

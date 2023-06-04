@@ -266,4 +266,8 @@ text-align: center;
     margin-top: 10px;
     transform: translateY(0);
   }
+  .slick-slide img {
+    height: 280px;
+    display: block;
+}
 }

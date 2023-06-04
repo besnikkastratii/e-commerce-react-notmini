@@ -37,7 +37,7 @@ export default class Navbar extends Component {
               </button>
               <div
                 className={`collapse navbar-collapse ${this.state.isMobileMenuOpen ? 'show' : '' }`} >
-                <ul className="navbar-nav align-items-center">
+                <ul className="navbar-nav align-items-left">
                   <li className="nav-item ml-5">
                     <Link to="/" className="nav-link">
                       Mobile Shop
